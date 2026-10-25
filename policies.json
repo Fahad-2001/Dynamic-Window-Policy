@@ -1,0 +1,505 @@
+{
+    "settings":  {
+                     "userScope":  "AllUsers",
+                     "excludeCurrentUser":  true,
+                     "excludeUsers":  [
+
+                                      ]
+                 },
+    "policies":  [
+                     {
+                         "id":  "remove-solitaire",
+                         "name":  "Remove Microsoft Solitaire Collection",
+                         "category":  "Apps",
+                         "description":  "Uninstalls Solitaire for all users and stops it being installed for new users. Unticking does NOT reinstall it (use Microsoft Store).",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "removeAppx",
+                                             "package":  "Microsoft.MicrosoftSolitaireCollection"
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "block-paint",
+                         "name":  "Remove and block MS Paint",
+                         "category":  "Apps",
+                         "description":  "Uninstalls the Paint app and blocks mspaint.exe / pbrush.exe from being launched. Unticking removes the block but does not reinstall Paint.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "removeAppx",
+                                             "package":  "Microsoft.Paint"
+                                         },
+                                         {
+                                             "type":  "blockApp",
+                                             "exe":  "mspaint.exe"
+                                         },
+                                         {
+                                             "type":  "blockApp",
+                                             "exe":  "pbrush.exe"
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "remove-xbox",
+                         "name":  "Remove Xbox / gaming apps",
+                         "category":  "Apps",
+                         "description":  "Uninstalls the Xbox app and Game Bar overlay.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "removeAppx",
+                                             "package":  "Microsoft.GamingApp"
+                                         },
+                                         {
+                                             "type":  "removeAppx",
+                                             "package":  "Microsoft.XboxGamingOverlay"
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "remove-consumer-apps",
+                         "name":  "Remove consumer apps (Clipchamp, News, Weather)",
+                         "category":  "Apps",
+                         "description":  "Uninstalls Clipchamp, Microsoft News and Weather.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "removeAppx",
+                                             "package":  "Clipchamp.Clipchamp"
+                                         },
+                                         {
+                                             "type":  "removeAppx",
+                                             "package":  "Microsoft.BingNews"
+                                         },
+                                         {
+                                             "type":  "removeAppx",
+                                             "package":  "Microsoft.BingWeather"
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "block-auto-installed-apps",
+                         "name":  "Stop Windows auto-installing suggested apps",
+                         "category":  "Apps",
+                         "description":  "Stops Windows silently installing promoted apps (games, social apps) and showing app suggestions.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKLM",
+                                             "path":  "SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+                                             "name":  "DisableWindowsConsumerFeatures",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         },
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+                                             "name":  "SilentInstalledAppsEnabled",
+                                             "valueType":  "DWord",
+                                             "value":  0
+                                         },
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+                                             "name":  "SystemPaneSuggestionsEnabled",
+                                             "valueType":  "DWord",
+                                             "value":  0
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "no-pin-taskbar",
+                         "name":  "Prevent pinning/unpinning apps on the taskbar",
+                         "category":  "Taskbar \u0026 Start",
+                         "description":  "Users cannot pin or unpin programs on the taskbar.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Policies\\Microsoft\\Windows\\Explorer",
+                                             "name":  "NoPinningToTaskbar",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "lock-taskbar",
+                         "name":  "Lock the taskbar",
+                         "category":  "Taskbar \u0026 Start",
+                         "description":  "Users cannot move or resize the taskbar.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                             "name":  "LockTaskbar",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "no-change-start",
+                         "name":  "Prevent changes to the Start menu",
+                         "category":  "Taskbar \u0026 Start",
+                         "description":  "Users cannot pin, unpin or rearrange apps in Start.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                             "name":  "NoChangeStartMenu",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "hide-recent-start",
+                         "name":  "Hide recent files in Start and jump lists",
+                         "category":  "Taskbar \u0026 Start",
+                         "description":  "Start \u0027Recommended\u0027 and right-click jump lists stop showing recently opened files.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                             "name":  "Start_TrackDocs",
+                                             "valueType":  "DWord",
+                                             "value":  0
+                                         },
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKLM",
+                                             "path":  "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+                                             "name":  "HideRecommendedSection",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "disable-widgets",
+                         "name":  "Disable Widgets (news feed)",
+                         "category":  "Taskbar \u0026 Start",
+                         "description":  "Removes the Widgets button and news feed from the taskbar.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKLM",
+                                             "path":  "SOFTWARE\\Policies\\Microsoft\\Dsh",
+                                             "name":  "AllowNewsAndInterests",
+                                             "valueType":  "DWord",
+                                             "value":  0
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "disable-copilot",
+                         "name":  "Disable / remove Copilot",
+                         "category":  "Taskbar \u0026 Start",
+                         "description":  "Turns off Windows Copilot and uninstalls the Copilot app.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+                                             "name":  "TurnOffWindowsCopilot",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         },
+                                         {
+                                             "type":  "removeAppx",
+                                             "package":  "Microsoft.Copilot"
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "no-web-search",
+                         "name":  "Disable web results in Start search",
+                         "category":  "Taskbar \u0026 Start",
+                         "description":  "Start/taskbar search only shows local results (no Bing).",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Policies\\Microsoft\\Windows\\Explorer",
+                                             "name":  "DisableSearchBoxSuggestions",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "qa-no-recent",
+                         "name":  "Quick Access: show no recent files or frequent folders",
+                         "category":  "File Explorer \u0026 Quick Access",
+                         "description":  "Nothing shows up automatically in Quick Access / Home, and recent-document history is not kept.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                                             "name":  "ShowRecent",
+                                             "valueType":  "DWord",
+                                             "value":  0
+                                         },
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                                             "name":  "ShowFrequent",
+                                             "valueType":  "DWord",
+                                             "value":  0
+                                         },
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                             "name":  "NoRecentDocsHistory",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         },
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                             "name":  "ClearRecentDocsOnExit",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "hide-quick-access",
+                         "name":  "Hide Quick Access / Home from File Explorer",
+                         "category":  "File Explorer \u0026 Quick Access",
+                         "description":  "Removes Quick Access/Home from the navigation pane and opens File Explorer on \u0027This PC\u0027.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKLM",
+                                             "path":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                                             "name":  "HubMode",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         },
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                             "name":  "LaunchTo",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "block-settings",
+                         "name":  "Block Settings app and Control Panel",
+                         "category":  "Settings \u0026 Control Panel",
+                         "description":  "Users cannot open Settings or Control Panel at all.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                             "name":  "NoControlPanel",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "hide-settings-pages",
+                         "name":  "Hide selected Settings pages",
+                         "category":  "Settings \u0026 Control Panel",
+                         "description":  "Settings still opens, but the listed pages are hidden. Edit the \u0027value\u0027 in policies.json to choose pages (ms-settings names).",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKLM",
+                                             "path":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                             "name":  "SettingsPageVisibility",
+                                             "valueType":  "String",
+                                             "value":  "hide:recovery;windowsdefender;developers;network-proxy;otherusers;signinoptions;dateandtime;appsfeatures"
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "disable-cmd",
+                         "name":  "Disable Command Prompt",
+                         "category":  "System tools",
+                         "description":  "Blocks the interactive Command Prompt (batch/logon scripts still run).",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Policies\\Microsoft\\Windows\\System",
+                                             "name":  "DisableCMD",
+                                             "valueType":  "DWord",
+                                             "value":  2
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "block-powershell",
+                         "name":  "Block PowerShell",
+                         "category":  "System tools",
+                         "description":  "Blocks powershell.exe, powershell_ise.exe and pwsh.exe from being launched from Start / Explorer.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "blockApp",
+                                             "exe":  "powershell.exe"
+                                         },
+                                         {
+                                             "type":  "blockApp",
+                                             "exe":  "powershell_ise.exe"
+                                         },
+                                         {
+                                             "type":  "blockApp",
+                                             "exe":  "pwsh.exe"
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "disable-regedit",
+                         "name":  "Disable Registry Editor",
+                         "category":  "System tools",
+                         "description":  "Blocks regedit.exe and reg.exe for users.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                                             "name":  "DisableRegistryTools",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "disable-taskmgr",
+                         "name":  "Disable Task Manager",
+                         "category":  "System tools",
+                         "description":  "Users cannot open Task Manager.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                                             "name":  "DisableTaskMgr",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "disable-run",
+                         "name":  "Disable the Run dialog (Win+R)",
+                         "category":  "System tools",
+                         "description":  "Removes Run from Start and disables Win+R.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKCU",
+                                             "path":  "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                                             "name":  "NoRun",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "block-usb-storage",
+                         "name":  "Block USB storage devices",
+                         "category":  "Devices",
+                         "description":  "USB flash drives / external disks will not mount. Keyboards and mice still work. Takes effect for newly plugged devices.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKLM",
+                                             "path":  "SYSTEM\\CurrentControlSet\\Services\\USBSTOR",
+                                             "name":  "Start",
+                                             "valueType":  "DWord",
+                                             "value":  4,
+                                             "revertValue":  3
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "disable-camera",
+                         "name":  "Disable the camera",
+                         "category":  "Devices",
+                         "description":  "Apps cannot use the webcam.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKLM",
+                                             "path":  "SOFTWARE\\Policies\\Microsoft\\Camera",
+                                             "name":  "AllowCamera",
+                                             "valueType":  "DWord",
+                                             "value":  0
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "disable-store",
+                         "name":  "Disable Microsoft Store",
+                         "category":  "Windows features",
+                         "description":  "Blocks the Microsoft Store app. NOTE: Windows only honours this on Enterprise/Education editions; on Pro use \u0027Add policy\u0027 to remove the Store app instead.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKLM",
+                                             "path":  "SOFTWARE\\Policies\\Microsoft\\WindowsStore",
+                                             "name":  "RemoveWindowsStore",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "block-msi-installs",
+                         "name":  "Block installing .msi packages",
+                         "category":  "Windows features",
+                         "description":  "Stops .msi installers from running. Untick it (and Apply) temporarily when IT needs to install, update or uninstall .msi software.",
+                         "enabled":  false,
+                         "actions":  [
+                                         {
+                                             "type":  "registry",
+                                             "hive":  "HKLM",
+                                             "path":  "SOFTWARE\\Policies\\Microsoft\\Windows\\Installer",
+                                             "name":  "DisableMSI",
+                                             "valueType":  "DWord",
+                                             "value":  1
+                                         }
+                                     ]
+                     }
+                 ]
+}
